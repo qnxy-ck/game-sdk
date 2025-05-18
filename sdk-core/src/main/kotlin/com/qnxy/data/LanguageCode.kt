@@ -1,0 +1,55 @@
+package com.qnxy.data
+
+/**
+ * @author Qnxy
+ */
+public enum class LanguageCode {
+
+    EN,
+    ZH,
+    AR,
+    AZ,
+    BG,
+    BN,
+    CS,
+    DA,
+    DE,
+    EL,
+    `EN-STKUS`,
+    ES,
+    ET,
+    FA,
+    FI,
+    FR,
+    HI,
+    HU,
+    HY,
+    ID,
+    IT,
+    JA,
+    KO,
+    LO,
+    LT,
+    MN,
+    MY,
+    NL,
+    NO,
+    PL,
+    PT,
+    `PT-BR`,
+    RO,
+    RU,
+    SH,
+    SI,
+    SK,
+    SQ,
+    SV,
+    TH,
+    TR,
+    UK,
+    UR,
+    UZ,
+    VI,
+
+
+}

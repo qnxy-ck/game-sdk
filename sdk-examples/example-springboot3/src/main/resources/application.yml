@@ -1,0 +1,7 @@
+game:
+  config:
+    enabled: true
+    endpoint-environment: test
+    merchant-code: test
+    merchant-key: test_key
+    callback-uri: /callback/ag
