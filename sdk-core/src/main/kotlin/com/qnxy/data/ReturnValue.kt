@@ -13,19 +13,21 @@ public data class ReturnValue<T>(
 ) {
 
     public fun isSuccessful(): Boolean {
-        return code == "C10000" && data != null
+        return code == SUCCESS_CODE && data != null
     }
 
 
     public companion object {
+        private const val SUCCESS_CODE = "C10000"
 
         @JvmStatic
         public fun <T> successful(data: T): ReturnValue<T> {
-            return ReturnValue("C10000", "success", data)
+            return ReturnValue(SUCCESS_CODE, "success", data)
         }
 
         @JvmStatic
-        public fun <T> failed(msg: String): ReturnValue<T> {
+        @JvmOverloads
+        public fun <T> failed(msg: String, code: String = ""): ReturnValue<T> {
             return ReturnValue("", msg, null)
         }
 

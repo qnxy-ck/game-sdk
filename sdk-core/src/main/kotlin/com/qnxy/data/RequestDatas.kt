@@ -8,9 +8,6 @@ import java.math.BigDecimal
  * @author Qnxy
  */
 @Serializable
-public sealed interface RequestData
-
-@Serializable
 public data class LaunchUrlReq(
     val gameCode: String,
     val playerSession: String,
@@ -23,7 +20,7 @@ public data class LaunchUrlReq(
     val terminalType: TerminalType,
     val subMerchantCode: String? = null,
     val returnUrl: String? = null
-) : RequestData
+)
 
 
 @Serializable
