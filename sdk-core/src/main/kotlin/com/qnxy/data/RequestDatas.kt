@@ -25,6 +25,14 @@ public data class LaunchUrlReq(
     val returnUrl: String? = null
 ) : RequestData
 
+@Serializable
+public data class SetPlayerRtpReq(
+    val currencyCode: String,
+    val rtp: Int,
+    val playerUniqueId: String,
+    val subMerchantCode: String? = null
+)
+
 
 @Serializable
 public data class VerifySessionReq(
@@ -38,3 +46,4 @@ public data class BalanceReq(
     val currencyCode: String
 
 )
+
