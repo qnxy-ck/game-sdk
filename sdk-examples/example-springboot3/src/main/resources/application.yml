@@ -2,6 +2,6 @@ game:
   config:
     enabled: true
     endpoint-environment: test
-    merchant-code: test
-    merchant-key: test_key
+    merchant-code: 5dbceef508f64e2098d1d0381500a9cf
+    merchant-key: f2df95940127438aaa59c12392101c0e
     callback-uri: /callback/ag

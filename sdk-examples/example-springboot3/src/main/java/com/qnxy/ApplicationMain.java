@@ -2,9 +2,14 @@ package com.qnxy;
 
 import com.qnxy.data.LaunchUrlReq;
 import com.qnxy.data.TerminalType;
-import org.springframework.beans.factory.InitializingBean;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
 
 import java.math.BigDecimal;
 
@@ -12,37 +17,33 @@ import java.math.BigDecimal;
  * @author Qnxy
  */
 @SpringBootApplication
-public class ApplicationMain implements InitializingBean {
-
-    private final GameClient gameClient;
-
-    public ApplicationMain(GameClient gameClient) {
-        this.gameClient = gameClient;
-    }
-
+@RequiredArgsConstructor
+@Slf4j
+public class ApplicationMain implements ApplicationListener<ApplicationReadyEvent> {
 
     public static void main(String[] args) {
         SpringApplication.run(ApplicationMain.class, args);
     }
 
+
+    private final GameClient gameClient;
+
     @Override
-    public void afterPropertiesSet() throws Exception {
-        final var launchUrlReq = new LaunchUrlReq(
+    public void onApplicationEvent(@NotNull ApplicationReadyEvent event) {
+        val launchUrlReq = new LaunchUrlReq(
                 "126",
                 "testSession",
                 "test_player_unique_id",
                 "BR_BRL",
                 "pt",
                 90,
-                new BigDecimal("1000.01"),
+                new BigDecimal("1000.99"),
                 TerminalType.PHONE,
                 null,
                 null
         );
-        final var gameLaunchUrlRespReturnValue = this.gameClient.launchUrlBlocking(launchUrlReq);
 
-        System.out.println("gameLaunchUrlRespReturnValue: " + gameLaunchUrlRespReturnValue);
-
-
+        val r = this.gameClient.launchUrlBlocking(launchUrlReq);
+        log.info("result: {}", r);
     }
 }

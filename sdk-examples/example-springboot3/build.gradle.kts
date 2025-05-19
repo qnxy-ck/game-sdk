@@ -10,7 +10,10 @@ dependencies {
     implementation(project(":sdk-adapter-springboot3"))
     
     implementation("org.springframework.boot:spring-boot-starter-web")
-    
+
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+
     testImplementation(kotlin("test"))
 }
 
