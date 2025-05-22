@@ -10,6 +10,17 @@ import java.math.BigDecimal
 @Serializable
 public data class GameLaunchUrlResp(val url: String)
 
+@Serializable
+public data class GameCategoryListResponse(
+    val categoryDataList: List<GameCategoryItem>,
+    val totalSize: Int
+) {
+    
+    @Serializable
+    public data class GameCategoryItem(val categoryName: String, val categoryCode: String)
+
+}
+
 
 @Serializable
 public data class VerifySessionResp(
