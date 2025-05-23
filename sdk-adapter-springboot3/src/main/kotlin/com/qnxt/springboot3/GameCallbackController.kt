@@ -17,10 +17,10 @@ public class GameCallbackController(
 ) {
 
 
-    @PostMapping("/*")
-    public fun callback(@RequestHeader header: HttpHeaders, @RequestBody json: String): ResponseEntity<String> {
+    @PostMapping("/{path}")
+    public fun callback(@RequestHeader header: HttpHeaders, @RequestBody json: String, @PathVariable path: String): ResponseEntity<String> {
         
-        val r = gameCallbackProcessor.handler(header.asSingleValueMap(), json)
+        val r = gameCallbackProcessor.handler(header.asSingleValueMap(), json, path)
         return ResponseEntity.status(200)
             .contentType(MediaType.APPLICATION_JSON)
             .body(r)

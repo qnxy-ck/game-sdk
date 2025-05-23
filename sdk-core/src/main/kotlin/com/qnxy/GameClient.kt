@@ -59,7 +59,10 @@ public class GameClient(
     }
 
     public enum class EndpointEnvironment(public val url: String) {
-        TEST("https://pre-api.agsoftgames.com/game/v3"),
+        // 仅供目前测试使用
+        TEST("https://test.agsoftgames.com/game/v3"),
+
+        PRE("https://pre-api.agsoftgames.com/game/v3"),
         PROD("https://api.agsoftgames.com/game/v3")
     }
 

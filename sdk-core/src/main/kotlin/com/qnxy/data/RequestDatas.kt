@@ -1,6 +1,7 @@
 package com.qnxy.data
 
 import com.qnxy.internal.BigDecimalSerializer
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.math.BigDecimal
 
@@ -43,4 +44,45 @@ public data class BalanceReq(
     val currencyCode: String
 
 )
+
+@Serializable
+public data class BetReq(
+    val playerUniqueId: String,
+    val currencyCode: String,
+    val gameCode: String,
+    val roundId: String,
+    val orderNo: String,
+    @Serializable(with = BigDecimalSerializer::class)
+    val betAmount: BigDecimal
+)
+
+
+@Serializable
+public data class WinReq(
+    val playerUniqueId: String,
+    val currencyCode: String,
+    val gameCode: String,
+    val roundId: String,
+    val orderNo: String,
+    val betOrderNo: String,
+    @Serializable(with = BigDecimalSerializer::class)
+    val betAmount: BigDecimal,
+    @Serializable(with = BigDecimalSerializer::class)
+    val winAmount: BigDecimal,
+    val type: WinType,
+    val isEnd: Boolean
+) {
+
+    @Serializable
+    public enum class WinType {
+        @SerialName("win")
+        WIN,
+
+        @SerialName("bet_win")
+        BET_WIN;
+    }
+}
+
+
+
 

@@ -37,3 +37,19 @@ public data class BalanceResp(
     @Serializable(with = BigDecimalSerializer::class)
     val balance: BigDecimal
 )
+
+
+@Serializable
+public data class BetResp(
+    val merchantOrderNo: String,
+    @Serializable(with = BigDecimalSerializer::class)
+    val balance: BigDecimal
+)
+
+@Serializable
+public data class WinResp(
+    val merchantOrderNo: String,
+    @Serializable(with = BigDecimalSerializer::class)
+    val balance: BigDecimal
+)
+

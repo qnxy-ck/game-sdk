@@ -11,4 +11,8 @@ public interface GameCallbackHandler {
 
     public fun getBalance(balanceReq: BalanceReq): ReturnValue<BalanceResp>
 
+    public fun bet(betReq: BetReq): ReturnValue<BetResp>
+
+    public fun win(winReq: WinReq): ReturnValue<WinResp>
+
 }

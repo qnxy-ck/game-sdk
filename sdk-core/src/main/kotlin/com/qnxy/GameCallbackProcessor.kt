@@ -23,24 +23,29 @@ public class GameCallbackProcessor(
         MAC.init(SecretKeySpec(merchantKey.toByteArray(), ALGORITHM))
     }
 
-    public fun handler(headerMap: Map<String, String>, data: String): String {
-        val callbackType = checkCallbackInfo(headerMap, data)
+    public fun handler(headerMap: Map<String, String>, data: String, path: String): String {
+        checkCallbackInfo(headerMap, data)
 
-        return when (callbackType) {
+        return when (path) {
             "verifySession" -> handler.verifySession(jsonInstance.decodeFromString(data))
                 .let { jsonInstance.encodeToString(it) }
 
             "getBalance" -> handler.getBalance(jsonInstance.decodeFromString(data))
                 .let { jsonInstance.encodeToString(it) }
 
-            else -> throw GameCallbackException("Unknown callback type: $callbackType")
+            "bet" -> handler.bet(jsonInstance.decodeFromString(data))
+                .let { jsonInstance.encodeToString(it) }
+
+            "win" -> handler.win(jsonInstance.decodeFromString(data))
+                .let { jsonInstance.encodeToString(it) }
+
+            else -> throw GameCallbackException("Unknown callback type: $path")
         }
     }
 
-    private fun checkCallbackInfo(headerMap: Map<String, String>, data: String): String {
+    private fun checkCallbackInfo(headerMap: Map<String, String>, data: String) {
         val m = headerMap.mapKeys { it.key.lowercase() }
 
-        val callbackType = m.requireNonBlank("x-callback-type")
         val merchantCode = m.requireNonBlank("x-merchant-code").takeIf { it == this.merchantCode } ?: throw IllegalArgumentException("merchant code is not matching $merchantCode")
         val sign = m.requireNonBlank("x-sign")
         val timestamp = m.requireNonBlank("x-timestamp")
@@ -48,7 +53,6 @@ public class GameCallbackProcessor(
         val contentProcessingType = m.requireNonBlank("x-content-processing-type")
 
         verifySign(merchantCode, sign, timestamp, nonce, contentProcessingType, data)
-        return callbackType
     }
 
     private fun Map<String, String>.requireNonBlank(key: String): String {
